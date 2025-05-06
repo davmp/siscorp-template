@@ -1,4 +1,5 @@
-import './index.css'
+import './styles.css'
+import 'siscorp-ui/style.css'
 
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
