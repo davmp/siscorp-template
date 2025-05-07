@@ -1,10 +1,6 @@
 import { useState } from "react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "siscorp-ui";
+import { Button } from "siscorp-ui";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Check, ChevronsUpDown } from "lucide-react";
 import {
@@ -14,7 +10,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "siscorp-ui";
 import { allPages } from "@/providers/pages";
 
 export default function SearchBox() {
@@ -59,11 +55,13 @@ export default function SearchBox() {
           role="combobox"
           aria-expanded={open}
           className={`w-[200px] justify-between !text-sm ${
-            !!selectedPageTitle ? "text-foreground" : "text-gray-500/50"
+            !!selectedPageTitle
+              ? "text-[var(--foreground)]"
+              : "text-gray-500/50"
           }`}
         >
           {selectedPageTitle || placeholder}
-          <ChevronsUpDown className="text-foreground opacity-50" />
+          <ChevronsUpDown className="text-[var(--foreground)] opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">

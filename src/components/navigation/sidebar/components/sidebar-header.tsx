@@ -1,7 +1,4 @@
-import {
-  SidebarHeader as SidebarHeaderBase,
-  useSidebar,
-} from "@/components/ui/sidebar";
+import { SidebarHeader as SidebarHeaderBase, useSidebar } from "siscorp-ui";
 import siscorp from "@/assets/siscorp.svg";
 import logo from "@/assets/logo-small.svg";
 
@@ -15,7 +12,7 @@ export default function SidebarHeader() {
         <div
           className={`rounded-sm ${
             !open ? "mx-autoa" : "min-w-7"
-          } ml-0.5 w-7 h-7 p-1 pointer-events-none select-none bg-primary-light`}
+          } ml-0.5 w-7 h-7 p-1 pointer-events-none select-none bg-[var(--primary-light)]`}
         >
           <img src={logo} className="select-none w-full h-full" />
         </div>

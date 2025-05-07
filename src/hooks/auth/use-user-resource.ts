@@ -1,4 +1,4 @@
-import { createResource } from "@/lib/utils";
+import { createResource } from "siscorp-ui";
 
 function fetchUser() {
   const storedUser = localStorage.getItem("user");

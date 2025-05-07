@@ -1,20 +1,9 @@
 import Sidebar from "@/components/navigation/sidebar/sidebar";
 import { Outlet } from "react-router-dom";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider } from "siscorp-ui";
 import { Header } from "@/components/navigation";
 
 export default function Layout() {
-  // const { isAuthenticated } = useAuth();
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  // if (!isAuthenticated) {
-  //   navigate("/entrar", {
-  //     state: { from: window.location.pathname },
-  //   });
-  // }
-  // }, [isAuthenticated, navigate]);
-
   return (
     <SidebarProvider
       style={{

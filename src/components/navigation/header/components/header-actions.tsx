@@ -1,4 +1,4 @@
-import { Button as ButtonBase } from "@/components/ui/button";
+import { Button as ButtonBase } from "siscorp-ui";
 import { Bell, Settings } from "lucide-react";
 import SearchBox from "./header-searchbox";
 

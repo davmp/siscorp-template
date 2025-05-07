@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import {
   Breadcrumb,
@@ -7,8 +8,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
+} from "siscorp-ui";
+import { SidebarTrigger, useSidebar } from "siscorp-ui";
 import { Link, useLocation } from "react-router-dom";
 import { allPages } from "@/providers/pages";
 
@@ -115,8 +116,8 @@ export default function HeaderPath() {
       </div>
 
       <div className="w-full max-w-full overflow-ellipsis">
-        <NormalPathCrumbs className="min-w-max hidden sm:block @[40%]/header-path:hidden" />
-        <SmallPathCrumbs className="min-w-max hidden @[420px]:block sm:hidden" />
+        <NormalPathCrumbs className="min-w-max hidden sm:!block @[40%]/header-path:hidden" />
+        <SmallPathCrumbs className="min-w-max hidden @[420px]:!block sm:hidden" />
       </div>
     </div>
   );

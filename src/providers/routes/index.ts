@@ -11,13 +11,11 @@ const mapPagesToRoutes = (
     (page) =>
       ({
         path: page.path,
-        element: page.children
-          ? undefined
-          : page.element && withSuspense(page.element),
+        element: !page.children && page.element && withSuspense(page.element),
         children: page.children
           ? [
               {
-                path: page.path,
+                index: true,
                 element: page.element && withSuspense(page.element),
               } as RouteObject,
               ...mapPagesToRoutes(page.children, withSuspense),
@@ -26,6 +24,7 @@ const mapPagesToRoutes = (
       } as RouteObject)
   );
 };
+
 export const routes = ({ withSuspense }: RoutesProps): RouteObject[] => {
   return mapPagesToRoutes(mappedPages, withSuspense);
 };

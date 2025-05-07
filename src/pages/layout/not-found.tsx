@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "siscorp-ui";
 import { Link, useRouteError, isRouteErrorResponse } from "react-router-dom";
 import logo from "@/assets/logo-small.svg";
 
@@ -6,6 +6,8 @@ interface Error {
   title: string;
   description: React.ReactNode;
 }
+
+const path = import.meta.env.VITE_APPLICATION_PATH;
 
 export default function NotFound() {
   const error = useRouteError();
@@ -29,7 +31,7 @@ export default function NotFound() {
       description: (
         <p className="text-muted-foreground text-center text-sm">
           A página que você está tentando acessar não existe ou foi removida.{" "}
-          <Link to="/" className="text-primary underline">
+          <Link to={path} className="text-primary underline">
             Voltar
           </Link>
         </p>
@@ -40,7 +42,7 @@ export default function NotFound() {
       description: (
         <p className="text-muted-foreground text-center text-sm">
           Você não tem permissão para acessar essa página.{" "}
-          <Link to="/" className="text-primary underline">
+          <Link to={path} className="text-primary underline">
             Voltar
           </Link>
         </p>
@@ -51,7 +53,7 @@ export default function NotFound() {
       description: (
         <p className="text-muted-foreground text-center text-sm">
           Ocorreu um erro inesperadom, tente novamente mais tarde.{" "}
-          <Link to="/" className="text-primary underline">
+          <Link to={path} className="text-primary underline">
             Voltar
           </Link>
         </p>
@@ -71,7 +73,7 @@ export default function NotFound() {
   console.error(error);
 
   return (
-    <section className="w-screen h-screen flex flex-col items-center bg-background p-6 md:p-10">
+    <section className="w-screen h-screen flex flex-col items-center bg-[var(--background)] p-6 md:p-10">
       <div className="flex flex-col w-full m-auto max-w-sm gap-6">
         <div className="flex items-center gap-2 self-center font-medium">
           <div

@@ -1,7 +1,4 @@
-import {
-  SidebarFooter as SidebarFooterBase,
-  SidebarMenu,
-} from "@/components/ui/sidebar";
+import { SidebarFooter as SidebarFooterBase, SidebarMenu } from "siscorp-ui";
 import SidebarProfileDropdown from "./sidebar-profile-dropdown";
 import { useAuth } from "@/hooks/auth/use-auth";
 

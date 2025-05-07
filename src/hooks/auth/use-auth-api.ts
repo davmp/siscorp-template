@@ -1,11 +1,10 @@
-import type { LoginRequest } from "@/lib/auth-type";
 import { useAuth } from "./use-auth";
 
 export function useAuthApi() {
   const { login, logout } = useAuth();
 
   return {
-    login: async (data: LoginRequest) => {
+    login: async (data: any) => {
       try {
         new Promise((r) => setTimeout(r, 2000));
 

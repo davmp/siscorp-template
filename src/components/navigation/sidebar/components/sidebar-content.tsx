@@ -1,4 +1,5 @@
 import {
+  cn,
   SidebarContent as SidebarContentBase,
   SidebarGroup,
   SidebarGroupContent,
@@ -9,26 +10,16 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   useSidebar,
-} from "@/components/ui/sidebar";
+} from "siscorp-ui";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+} from "siscorp-ui";
 import { pages, allPages } from "@/providers/pages";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import type { Page } from "@/types/page";
-
-function findParent(page?: Page) {
-  if (page) {
-    for (const parent of pages) {
-      if (parent.children?.some((child) => child.path === page.path)) {
-        return parent;
-      }
-    }
-  }
-}
 
 function getTooltip(content: React.ReactNode) {
   return {
@@ -43,31 +34,43 @@ export default function SidebarContent() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const parent = pages.find((page) => page.index);
+
   const selectedPage = allPages.find((page) => page.path === location.pathname);
-  const selectedParentPage =
-    selectedPage && selectedPage.children
-      ? selectedPage
-      : findParent(selectedPage);
+  const selectedParentPage = selectedPage?.children ? selectedPage : parent;
   const visiblePages: Page[] =
-    (selectedPage && selectedPage?.children) ||
-    findParent(selectedPage)?.children ||
-    pages;
-  const isCustomSelectedPage = visiblePages !== pages;
+    selectedPage?.children ?? parent?.children ?? pages;
 
   const handleBackNavigation = () => {
-    navigate(location.pathname.split("/").slice(0, -1).join("/"));
+    const pathSegments = location.pathname.split("/");
+    const newPath = pathSegments.slice(0, -1).join("/") || "/";
+    navigate(newPath);
   };
 
-  const renderPageItem = (page: Page) => (
-    <SidebarMenuItem key={page.title}>
-      <SidebarMenuButton asChild tooltip={getTooltip(page.name || page.title)}>
-        <a href={page.path} className="cursor-pointer">
-          <page.icon />
-          <span>{page.title}</span>
-        </a>
-      </SidebarMenuButton>
-    </SidebarMenuItem>
-  );
+  const renderPageItem = (page: Page) => {
+    const isSamePath = page.path === location.pathname;
+    const ElementTag = isSamePath ? "div" : "a";
+
+    return (
+      <SidebarMenuItem key={page.title}>
+        <SidebarMenuButton
+          asChild
+          tooltip={getTooltip(page.name || page.title)}
+        >
+          <ElementTag
+            {...(!isSamePath && { href: page.path })}
+            className={cn(
+              "cursor-pointer",
+              isSamePath && "bg-[var(--border)]/30"
+            )}
+          >
+            <page.icon />
+            <span>{page.title}</span>
+          </ElementTag>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+    );
+  };
 
   const renderPageGroup = (page: Page) => (
     <Collapsible className="group/collapsible" key={page.title}>
@@ -77,8 +80,12 @@ export default function SidebarContent() {
             asChild
             tooltip={getTooltip(page.title)}
             onClick={() => {
-              !open ||
-                (isMobile && !openMobile && page.path && navigate(page.path));
+              if (
+                !open ||
+                (isMobile && !openMobile && page.path !== location.pathname)
+              ) {
+                page.path && navigate(page.path);
+              }
             }}
           >
             <a className="cursor-pointer *:text-primary-dark">
@@ -110,24 +117,22 @@ export default function SidebarContent() {
       <SidebarGroup>
         <SidebarGroupContent>
           <SidebarMenu>
-            {isCustomSelectedPage && selectedParentPage && (
-              <SidebarMenuItem className="flex items-center gap-1">
-                <SidebarMenuButton
-                  asChild
-                  tooltip={getTooltip("Voltar")}
-                  onClick={handleBackNavigation}
-                >
-                  <a className="hover:!bg-transparent cursor-pointer flex items-center opacity-50 !gap-1">
-                    <ChevronLeft className="!w-4 !h-4" />
-                    <span className="pointer-events-none text-xs">
-                      {selectedParentPage === selectedPage
-                        ? "Início"
-                        : selectedParentPage.title}
-                    </span>
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            )}
+            <SidebarMenuItem className="flex items-center gap-1">
+              <SidebarMenuButton
+                asChild
+                tooltip={getTooltip("Voltar")}
+                onClick={handleBackNavigation}
+              >
+                <a className="hover:!bg-transparent cursor-pointer flex items-center opacity-50 !gap-1">
+                  <ChevronLeft className="!w-4 !h-4" />
+                  <span className="pointer-events-none text-xs">
+                    {selectedParentPage && selectedParentPage !== selectedPage
+                      ? selectedParentPage.title
+                      : "Início"}
+                  </span>
+                </a>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
             {visiblePages.map((page) =>
               page.children ? renderPageGroup(page) : renderPageItem(page)
             )}

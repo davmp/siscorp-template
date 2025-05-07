@@ -1,10 +1,8 @@
 import router from "./providers/routes/router";
 import { Fragment } from "react/jsx-runtime";
 import { RouterProvider } from "react-router-dom";
-import { TooltipProvider } from "./components/ui/tooltip";
+import { TooltipProvider, Toaster, useIsMobile } from "siscorp-ui";
 import { AuthProvider } from "./providers/auth/auth-provider";
-import { Toaster } from "./components/ui/sonner";
-import { useIsMobile } from "./hooks/use-mobile";
 
 export default function App() {
   const isMobile = useIsMobile();
