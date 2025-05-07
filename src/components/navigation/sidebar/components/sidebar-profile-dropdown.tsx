@@ -15,13 +15,10 @@ import {
   MoreVerticalIcon,
   Settings,
 } from "lucide-react";
-import { useAuthApi } from "@/hooks/auth/use-auth-api";
 import { toast } from "sonner";
-import type { User } from "@/lib/auth-type";
 import { useNavigate } from "react-router-dom";
 
-export default function SidebarProfileDropdown({ user }: { user: User }) {
-  const { logout } = useAuthApi();
+export default function SidebarProfileDropdown({ user }: { user: any }) {
   const { isMobile } = useSidebar();
   const navigate = useNavigate();
 
@@ -32,14 +29,8 @@ export default function SidebarProfileDropdown({ user }: { user: User }) {
       .map((name) => name.slice(0, 1).toUpperCase());
 
   async function handleLogout() {
-    const response = await logout();
-
-    if (response) {
-      toast("Até logo! 👋");
-      navigate("/entrar");
-    } else {
-      console.error("Erro no logout");
-    }
+    toast("Até logo! 👋");
+    navigate("/entrar");
   }
 
   const dropdownItems = [
@@ -88,14 +79,14 @@ export default function SidebarProfileDropdown({ user }: { user: User }) {
         side={isMobile ? "bottom" : "right"}
         align="end"
         sideOffset={4}
-        >
+      >
         <DropdownMenuLabel className="p-0 font-normal">
           <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-        {/* @ts-ignore */}
+            {/* @ts-ignore */}
             <Avatar className="h-8 w-8 rounded-lg">
-        {/* @ts-ignore */}
+              {/* @ts-ignore */}
               <AvatarImage src={user.avatar} alt={user.name} />
-        {/* @ts-ignoreß */}
+              {/* @ts-ignoreß */}
               <AvatarFallback className="rounded-lg">
                 {nameInitials(user.name)}
               </AvatarFallback>
