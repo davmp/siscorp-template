@@ -29,9 +29,9 @@ export default function SearchBox() {
         .replace(/[\u0300-\u036f]/g, "")
         .toLowerCase();
 
-    const title = normalize(page.title);
+    const title = normalize(page.title || "");
     const name = normalize(page.name || "");
-    const term = normalize(searchTerm);
+    const term = normalize(searchTerm || "");
 
     const initials = title
       .split(/\s+/)
