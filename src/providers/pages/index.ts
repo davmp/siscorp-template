@@ -1,4 +1,4 @@
-import { pages as module } from "./modules";
+import { pages as module } from "./page";
 import type { Page } from "../../types/page";
 
 const _pages = [...module] as Page[];
