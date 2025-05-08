@@ -13,7 +13,7 @@ export default function SidebarFooter() {
   return (
     <SidebarFooterBase>
       <SidebarMenu>
-        {user && <SidebarProfileDropdown user={user} />}
+        <SidebarProfileDropdown user={user} />
       </SidebarMenu>
     </SidebarFooterBase>
   );

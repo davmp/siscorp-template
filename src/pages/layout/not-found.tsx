@@ -1,6 +1,12 @@
-import { Card, CardContent, CardHeader, CardTitle } from "siscorp-ui";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  infraLogoSmall,
+  siscorpLogo,
+} from "siscorp-ui";
 import { Link, useRouteError, isRouteErrorResponse } from "react-router-dom";
-import logo from "@/assets/logo-small.svg";
 
 interface Error {
   title: string;
@@ -81,11 +87,9 @@ export default function NotFound() {
               !open ? "mx-autoa" : "min-w-7"
             } w-7 h-7 p-1 pointer-events-none select-none bg-primary`}
           >
-            <img src={logo} className="select-none w-full h-full" />
+            <img src={infraLogoSmall} className="select-none w-full h-full" />
           </div>
-          <span className="text-xl font-bold text-primary text-nowrap">
-            SISCORP
-          </span>
+          <img src={siscorpLogo} className="h-6" />
         </div>
         <div className={"flex flex-col gap-6"}>
           <Card>

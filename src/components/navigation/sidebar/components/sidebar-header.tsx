@@ -1,6 +1,9 @@
-import { SidebarHeader as SidebarHeaderBase, useSidebar } from "siscorp-ui";
-import siscorp from "@/assets/siscorp.svg";
-import logo from "@/assets/logo-small.svg";
+import {
+  SidebarHeader as SidebarHeaderBase,
+  useSidebar,
+  siscorpLogo,
+  infraLogoSmall,
+} from "siscorp-ui";
 
 export default function SidebarHeader() {
   const { open, isMobile, openMobile } = useSidebar();
@@ -14,9 +17,11 @@ export default function SidebarHeader() {
             !open ? "mx-autoa" : "min-w-7"
           } ml-0.5 w-7 h-7 p-1 pointer-events-none select-none bg-[var(--primary-light)]`}
         >
-          <img src={logo} className="select-none w-full h-full" />
+          <img src={infraLogoSmall} className="select-none w-full h-full" />
         </div>
-        {showTitle && <img src={siscorp} className="select-none h-5 mr-2" />}
+        {showTitle && (
+          <img src={siscorpLogo} className="select-none h-5 mr-2" />
+        )}
       </a>
     </SidebarHeaderBase>
   );
