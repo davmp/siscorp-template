@@ -3,7 +3,15 @@ import { Popover, PopoverTrigger, PopoverContent, Calendar } from "siscorp-ui";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 
-export function CalendarInput({
+type CalendarInputProps = CalendarProps & {
+  selected?: Date;
+  onSelect: (date?: Date) => void;
+  name?: string;
+  isDisabled?: boolean;
+  placeholder?: string;
+};
+
+const CalendarInput = ({
   selected,
   onSelect,
   name,
@@ -11,13 +19,7 @@ export function CalendarInput({
   placeholder,
   isDisabled,
   ...props
-}: CalendarProps & {
-  selected?: Date;
-  onSelect: (date?: Date) => void;
-  name?: string;
-  isDisabled?: boolean;
-  placeholder?: string;
-}) {
+}: CalendarInputProps) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -51,4 +53,6 @@ export function CalendarInput({
       />
     </Popover>
   );
-}
+};
+
+export { CalendarInput };
